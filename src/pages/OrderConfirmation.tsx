@@ -4,20 +4,20 @@ import { CheckCircle, ExternalLink } from 'lucide-react';
 
 const OrderConfirmation: React.FC = () => {
   return (
-    <main className="min-h-screen pt-24 pb-20 bg-[#FFF8F5] flex items-center justify-center">
-      <div className="max-w-md mx-auto px-4 text-center">
-        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-green-50 flex items-center justify-center">
-          <CheckCircle size={32} className="text-green-600" />
+    <main className="min-h-screen pt-32 pb-28 bg-white flex items-center justify-center">
+      <div className="max-w-md mx-auto px-6 text-center">
+        <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-gray-50 flex items-center justify-center">
+          <CheckCircle size={36} className="text-black" />
         </div>
 
-        <h1 className="font-['Playfair_Display'] text-3xl text-[#4E342E] mb-3">
+        <h1 className="font-['Playfair_Display'] text-4xl text-black mb-4">
           Your Order Details Are Ready
         </h1>
 
-        <p className="text-[#4E342E]/70 mb-2 leading-relaxed">
+        <p className="text-lg text-gray-600 mb-3 leading-relaxed">
           Continue in WhatsApp to complete your order.
         </p>
-        <p className="text-sm text-[#4E342E]/50 mb-8">
+        <p className="text-sm text-gray-500 mb-12">
           If WhatsApp didn't open automatically, click the button below.
         </p>
 
@@ -25,22 +25,22 @@ const OrderConfirmation: React.FC = () => {
           href="https://wa.me/919277406933"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 text-sm uppercase tracking-wider font-medium hover:bg-[#128C7E] transition-colors mb-4"
+          className="inline-flex items-center gap-3 bg-black text-white px-10 py-5 text-sm uppercase tracking-[0.15em] font-medium hover:bg-gray-800 transition-colors mb-6"
         >
           <ExternalLink size={16} />
           Open WhatsApp
         </a>
 
-        <div className="mt-8 pt-8 border-t border-[#E6B89C]/20">
+        <div className="mt-12 pt-10 border-t border-gray-100">
           <Link
             to="/shop"
-            className="text-sm text-[#C97B63] hover:underline uppercase tracking-wider"
+            className="text-sm text-black hover:underline uppercase tracking-[0.15em]"
           >
             Continue Shopping
           </Link>
         </div>
 
-        <p className="mt-8 text-xs text-[#4E342E]/40">
+        <p className="mt-12 text-xs text-gray-400 leading-relaxed">
           Note: Your order is confirmed only after communication via WhatsApp.
           <br />
           Payment details will be shared through WhatsApp.

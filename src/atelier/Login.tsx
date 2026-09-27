@@ -23,7 +23,6 @@ const AtelierLogin: React.FC = () => {
     setError('');
 
     if (username === ATELIER_USERNAME && password === ATELIER_PASSWORD) {
-      // Store session in localStorage
       localStorage.setItem(ATELIER_SESSION_KEY, 'active');
       navigate('/atelier');
     } else {
@@ -32,41 +31,41 @@ const AtelierLogin: React.FC = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#FFF8F5] flex items-center justify-center px-4">
+    <main className="min-h-screen bg-white flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
-        <div className="text-center mb-10">
-          <h1 className="font-['Playfair_Display'] text-3xl text-[#4E342E] mb-2">
+        <div className="text-center mb-14">
+          <h1 className="font-['Playfair_Display'] text-4xl text-black mb-3">
             ATELIER
           </h1>
-          <p className="text-sm text-[#4E342E]/50">
+          <p className="text-sm text-gray-500">
             Team access only.
           </p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-5">
+        <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-xs uppercase tracking-wider text-[#4E342E]/60 font-medium mb-2">
+            <label className="block text-[11px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-3">
               Username
             </label>
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-3 bg-white border border-[#E6B89C]/30 text-sm text-[#4E342E] focus:outline-none focus:border-[#C97B63] transition-colors"
+              className="w-full px-5 py-4 bg-gray-50 border border-gray-200 text-sm text-black focus:outline-none focus:border-black transition-colors"
               placeholder="Enter username"
               required
             />
           </div>
 
           <div>
-            <label className="block text-xs uppercase tracking-wider text-[#4E342E]/60 font-medium mb-2">
+            <label className="block text-[11px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-3">
               Password
             </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 bg-white border border-[#E6B89C]/30 text-sm text-[#4E342E] focus:outline-none focus:border-[#C97B63] transition-colors"
+              className="w-full px-5 py-4 bg-gray-50 border border-gray-200 text-sm text-black focus:outline-none focus:border-black transition-colors"
               placeholder="Enter password"
               required
             />
@@ -78,13 +77,13 @@ const AtelierLogin: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full bg-[#4E342E] text-white py-3 text-sm uppercase tracking-[0.1em] font-medium hover:bg-[#C97B63] transition-colors"
+            className="w-full bg-black text-white py-5 text-sm uppercase tracking-[0.15em] font-medium hover:bg-gray-800 transition-colors"
           >
             Sign In
           </button>
         </form>
 
-        <p className="text-center text-[10px] text-[#4E342E]/30 mt-8">
+        <p className="text-center text-[10px] text-gray-400 mt-10">
           This is a frontend access gate. Not enterprise-grade authentication.
         </p>
       </div>

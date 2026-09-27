@@ -20,17 +20,17 @@ const ProductDetail: React.FC = () => {
 
   if (!product) {
     return (
-      <main className="min-h-screen pt-24 pb-20 bg-[#FFF8F5] flex items-center justify-center">
+      <main className="min-h-screen pt-32 pb-28 bg-white flex items-center justify-center">
         <div className="text-center">
-          <h1 className="font-['Playfair_Display'] text-3xl text-[#4E342E] mb-4">
+          <h1 className="font-['Playfair_Display'] text-4xl text-black mb-6">
             Product Not Found
           </h1>
-          <p className="text-[#4E342E]/60 mb-6">
+          <p className="text-gray-500 mb-8">
             The product you're looking for doesn't exist.
           </p>
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2 text-sm text-[#C97B63] hover:underline uppercase tracking-wider"
+            className="inline-flex items-center gap-2 text-sm text-black hover:underline uppercase tracking-[0.15em]"
           >
             <ArrowLeft size={14} /> Back to Shop
           </Link>
@@ -49,22 +49,22 @@ const ProductDetail: React.FC = () => {
   };
 
   return (
-    <main className="min-h-screen pt-20 sm:pt-24 pb-20 bg-[#FFF8F5]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen pt-28 sm:pt-32 pb-28 bg-white">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
         {/* Breadcrumb */}
-        <div className="mb-6">
+        <div className="mb-10">
           <Link
             to="/shop"
-            className="inline-flex items-center gap-1 text-xs uppercase tracking-wider text-[#4E342E]/50 hover:text-[#C97B63] transition-colors"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors"
           >
             <ArrowLeft size={12} /> Back to Shop
           </Link>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Gallery */}
-          <div className="space-y-4">
-            <div className="aspect-[3/4] bg-[#F3E9D9] overflow-hidden">
+          <div className="space-y-5">
+            <div className="aspect-[3/4] bg-gray-50 overflow-hidden">
               <ImagePlaceholder
                 src={product.images[selectedImage] || ''}
                 alt={product.name}
@@ -72,13 +72,13 @@ const ProductDetail: React.FC = () => {
               />
             </div>
             {product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-4 gap-3">
                 {product.images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setSelectedImage(idx)}
-                    className={`aspect-square bg-[#F3E9D9] overflow-hidden border-2 transition-colors ${
-                      idx === selectedImage ? 'border-[#C97B63]' : 'border-transparent'
+                    className={`aspect-square bg-gray-50 overflow-hidden border-2 transition-colors ${
+                      idx === selectedImage ? 'border-black' : 'border-transparent hover:border-gray-300'
                     }`}
                   >
                     <ImagePlaceholder
@@ -93,52 +93,52 @@ const ProductDetail: React.FC = () => {
           </div>
 
           {/* Product Info */}
-          <div className="space-y-6 lg:py-4">
+          <div className="space-y-8 lg:py-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.15em] text-[#C97B63] font-medium mb-2">
+              <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-3">
                 {product.category}
               </p>
-              <h1 className="font-['Playfair_Display'] text-3xl sm:text-4xl text-[#4E342E] mb-4">
+              <h1 className="font-['Playfair_Display'] text-4xl sm:text-5xl text-black mb-6">
                 {product.name}
               </h1>
-              <div className="flex items-center gap-3">
-                <span className="text-2xl font-semibold text-[#4E342E]">
+              <div className="flex items-center gap-4">
+                <span className="text-3xl font-semibold text-black">
                   {formatPrice(product.price)}
                 </span>
                 {product.originalPrice && (
-                  <span className="text-lg text-[#4E342E]/40 line-through">
+                  <span className="text-xl text-gray-400 line-through">
                     {formatPrice(product.originalPrice)}
                   </span>
                 )}
                 {product.discount > 0 && (
-                  <span className="bg-[#C97B63]/10 text-[#C97B63] text-xs font-medium px-2 py-1">
+                  <span className="bg-gray-100 text-black text-xs font-medium px-3 py-1.5">
                     -{product.discount}%
                   </span>
                 )}
               </div>
             </div>
 
-            <p className="text-[#4E342E]/70 leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed">
               {product.description}
             </p>
 
             {/* Variants */}
             {product.variants.map((variant) => (
               <div key={variant.name}>
-                <p className="text-xs uppercase tracking-wider text-[#4E342E]/60 font-medium mb-3">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-4">
                   {variant.name}: {selectedVariants[variant.name] || 'Select'}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {variant.options.map((option) => (
                     <button
                       key={option}
                       onClick={() =>
                         setSelectedVariants((prev) => ({ ...prev, [variant.name]: option }))
                       }
-                      className={`px-4 py-2 text-xs border transition-colors ${
+                      className={`px-5 py-3 text-xs border transition-colors ${
                         selectedVariants[variant.name] === option
-                          ? 'border-[#C97B63] bg-[#C97B63] text-white'
-                          : 'border-[#E6B89C]/40 text-[#4E342E]/70 hover:border-[#C97B63]'
+                          ? 'border-black bg-black text-white'
+                          : 'border-gray-200 text-gray-600 hover:border-black'
                       }`}
                     >
                       {option}
@@ -151,18 +151,18 @@ const ProductDetail: React.FC = () => {
             {/* Colors */}
             {product.colors.length > 0 && (
               <div>
-                <p className="text-xs uppercase tracking-wider text-[#4E342E]/60 font-medium mb-3">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-4">
                   Color: {selectedColor || 'Select'}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {product.colors.map((color) => (
                     <button
                       key={color}
                       onClick={() => setSelectedColor(color)}
-                      className={`px-4 py-2 text-xs border transition-colors ${
+                      className={`px-5 py-3 text-xs border transition-colors ${
                         selectedColor === color
-                          ? 'border-[#C97B63] bg-[#C97B63] text-white'
-                          : 'border-[#E6B89C]/40 text-[#4E342E]/70 hover:border-[#C97B63]'
+                          ? 'border-black bg-black text-white'
+                          : 'border-gray-200 text-gray-600 hover:border-black'
                       }`}
                     >
                       {color}
@@ -174,23 +174,23 @@ const ProductDetail: React.FC = () => {
 
             {/* Quantity */}
             <div>
-              <p className="text-xs uppercase tracking-wider text-[#4E342E]/60 font-medium mb-3">
+              <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-4">
                 Quantity
               </p>
-              <div className="flex items-center border border-[#E6B89C]/40 w-fit">
+              <div className="flex items-center border border-gray-200 w-fit">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="p-3 text-[#4E342E]/60 hover:text-[#4E342E] transition-colors"
+                  className="p-4 text-gray-600 hover:text-black transition-colors"
                   aria-label="Decrease quantity"
                 >
                   <Minus size={14} />
                 </button>
-                <span className="px-4 text-sm font-medium text-[#4E342E] min-w-[40px] text-center">
+                <span className="px-6 text-sm font-medium text-black min-w-[50px] text-center">
                   {quantity}
                 </span>
                 <button
                   onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                  className="p-3 text-[#4E342E]/60 hover:text-[#4E342E] transition-colors"
+                  className="p-4 text-gray-600 hover:text-black transition-colors"
                   aria-label="Increase quantity"
                 >
                   <Plus size={14} />
@@ -201,28 +201,28 @@ const ProductDetail: React.FC = () => {
             {/* Stock */}
             <div className="flex items-center gap-2">
               {product.inStock ? (
-                <span className="text-xs text-green-700 bg-green-50 px-2 py-1">
+                <span className="text-xs text-green-700 bg-green-50 px-3 py-1.5">
                   In Stock ({product.stock} available)
                 </span>
               ) : (
-                <span className="text-xs text-red-700 bg-red-50 px-2 py-1">
+                <span className="text-xs text-red-700 bg-red-50 px-3 py-1.5">
                   Out of Stock
                 </span>
               )}
             </div>
 
             {/* Shipping */}
-            <div className="flex items-center gap-2 text-sm text-[#4E342E]/60 py-3 border-t border-[#E6B89C]/20">
+            <div className="flex items-center gap-3 text-sm text-gray-600 py-5 border-t border-gray-100">
               <Truck size={16} />
               <span>Shipping: {formatPrice(product.shippingCharge)}</span>
             </div>
 
             {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
-                className="flex-1 flex items-center justify-center gap-2 bg-[#4E342E] text-white py-4 text-sm uppercase tracking-[0.1em] font-medium hover:bg-[#C97B63] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 flex items-center justify-center gap-3 bg-black text-white py-5 text-sm uppercase tracking-[0.15em] font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ShoppingBag size={16} />
                 Add to Cart
@@ -230,7 +230,7 @@ const ProductDetail: React.FC = () => {
               <button
                 onClick={handleBuyNow}
                 disabled={!product.inStock}
-                className="flex-1 flex items-center justify-center gap-2 border-2 border-[#4E342E] text-[#4E342E] py-4 text-sm uppercase tracking-[0.1em] font-medium hover:bg-[#4E342E] hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 flex items-center justify-center gap-3 border-2 border-black text-black py-5 text-sm uppercase tracking-[0.15em] font-medium hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Buy Now
               </button>

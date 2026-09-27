@@ -32,35 +32,34 @@ const AtelierDashboard: React.FC = () => {
   const newArrivals = products.filter((p) => p.newArrival);
   const featuredProducts = products.filter((p) => p.featured);
 
-  // Recently added (last 3 products in array)
   const recentProducts = products.slice(-3).reverse();
 
   return (
-    <div className="min-h-screen bg-[#FFF8F5]">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-[#4E342E] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link to="/" className="text-xs text-white/50 hover:text-white/70 transition-colors flex items-center gap-1">
+      <header className="bg-black text-white">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <Link to="/" className="text-xs text-gray-400 hover:text-white transition-colors flex items-center gap-2">
               <ArrowLeft size={12} /> Store
             </Link>
-            <span className="text-white/20">|</span>
-            <h1 className="font-['Playfair_Display'] text-xl tracking-wider">
+            <span className="text-gray-700">|</span>
+            <h1 className="font-['Playfair_Display'] text-xl tracking-[0.15em]">
               ATELIER
             </h1>
           </div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 text-xs text-white/60 hover:text-white transition-colors uppercase tracking-wider"
+            className="flex items-center gap-2 text-xs text-gray-400 hover:text-white transition-colors uppercase tracking-[0.15em]"
           >
             <LogOut size={14} /> Sign Out
           </button>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 py-12">
         {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 mb-14">
           <StatCard icon={<Package size={18} />} label="Total Products" value={products.length} />
           <StatCard icon={<Tag size={18} />} label="Active" value={activeProducts.length} />
           <StatCard icon={<Package size={18} />} label="Hidden" value={hiddenProducts.length} />
@@ -69,8 +68,8 @@ const AtelierDashboard: React.FC = () => {
         </div>
 
         {/* Categories */}
-        <div className="mb-10">
-          <h2 className="text-sm uppercase tracking-wider text-[#4E342E] font-medium mb-4">
+        <div className="mb-14">
+          <h2 className="text-sm uppercase tracking-[0.2em] text-black font-medium mb-6">
             Product Categories
           </h2>
           <div className="flex flex-wrap gap-3">
@@ -79,9 +78,9 @@ const AtelierDashboard: React.FC = () => {
               return (
                 <span
                   key={cat}
-                  className="px-4 py-2 bg-white border border-[#E6B89C]/20 text-sm text-[#4E342E]"
+                  className="px-5 py-3 bg-gray-50 border border-gray-100 text-sm text-black"
                 >
-                  {cat} <span className="text-[#4E342E]/40">({count})</span>
+                  {cat} <span className="text-gray-400">({count})</span>
                 </span>
               );
             })}
@@ -89,20 +88,20 @@ const AtelierDashboard: React.FC = () => {
         </div>
 
         {/* Recent Products */}
-        <div className="mb-10">
-          <h2 className="text-sm uppercase tracking-wider text-[#4E342E] font-medium mb-4">
+        <div className="mb-14">
+          <h2 className="text-sm uppercase tracking-[0.2em] text-black font-medium mb-6">
             Recently Added Products
           </h2>
-          <div className="bg-white border border-[#E6B89C]/10 divide-y divide-[#E6B89C]/10">
+          <div className="bg-gray-50 border border-gray-100 divide-y divide-gray-100">
             {recentProducts.map((product) => (
-              <div key={product.id} className="flex items-center justify-between p-4">
+              <div key={product.id} className="flex items-center justify-between p-6">
                 <div>
-                  <p className="text-sm font-medium text-[#4E342E]">{product.name}</p>
-                  <p className="text-xs text-[#4E342E]/50">{product.category}</p>
+                  <p className="text-sm font-medium text-black">{product.name}</p>
+                  <p className="text-xs text-gray-500 mt-1">{product.category}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-medium text-[#4E342E]">{formatPrice(product.price)}</p>
-                  <p className="text-xs text-[#4E342E]/50">
+                  <p className="text-sm font-medium text-black">{formatPrice(product.price)}</p>
+                  <p className="text-xs text-gray-500 mt-1">
                     Stock: {product.stock}
                   </p>
                 </div>
@@ -112,26 +111,26 @@ const AtelierDashboard: React.FC = () => {
         </div>
 
         {/* Product Management Info */}
-        <div className="bg-[#F3E9D9]/50 border border-[#E6B89C]/20 p-6 sm:p-8">
-          <h2 className="text-sm uppercase tracking-wider text-[#4E342E] font-medium mb-4">
+        <div className="bg-gray-50 border border-gray-100 p-8 sm:p-10">
+          <h2 className="text-sm uppercase tracking-[0.2em] text-black font-medium mb-6">
             Product Management
           </h2>
-          <div className="space-y-4 text-sm text-[#4E342E]/70">
+          <div className="space-y-5 text-sm text-gray-600">
             <p>
               Products are managed through the GitHub product data file. To add or modify products:
             </p>
-            <ol className="list-decimal list-inside space-y-2 ml-2">
-              <li>Add product images to <code className="bg-white px-1.5 py-0.5 text-xs">public/products/[product-name]/</code></li>
-              <li>Add/edit product data in <code className="bg-white px-1.5 py-0.5 text-xs">src/data/products.ts</code></li>
+            <ol className="list-decimal list-inside space-y-3 ml-2">
+              <li>Add product images to <code className="bg-white px-2 py-0.5 text-xs border border-gray-200">public/products/[product-name]/</code></li>
+              <li>Add/edit product data in <code className="bg-white px-2 py-0.5 text-xs border border-gray-200">src/data/products.ts</code></li>
               <li>Commit changes to GitHub</li>
               <li>Netlify automatically deploys the updates</li>
             </ol>
 
-            <div className="mt-6 p-4 bg-white border border-[#E6B89C]/10">
-              <p className="text-xs uppercase tracking-wider text-[#4E342E]/50 font-medium mb-3">
+            <div className="mt-8 p-6 bg-white border border-gray-100">
+              <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-4">
                 Product Template
               </p>
-              <pre className="text-xs text-[#4E342E]/70 overflow-x-auto whitespace-pre-wrap">
+              <pre className="text-xs text-gray-600 overflow-x-auto whitespace-pre-wrap">
 {`{
   id: "product-xxx",
   name: "Product Name",
@@ -164,20 +163,19 @@ const AtelierDashboard: React.FC = () => {
   );
 };
 
-// Stat Card Component
 const StatCard: React.FC<{ icon: React.ReactNode; label: string; value: number }> = ({
   icon,
   label,
   value,
 }) => (
-  <div className="bg-white border border-[#E6B89C]/10 p-4">
-    <div className="flex items-center gap-2 text-[#C97B63] mb-2">
+  <div className="bg-gray-50 border border-gray-100 p-6">
+    <div className="flex items-center gap-3 text-black mb-3">
       {icon}
-      <span className="text-[10px] uppercase tracking-wider text-[#4E342E]/50 font-medium">
+      <span className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-medium">
         {label}
       </span>
     </div>
-    <p className="text-2xl font-semibold text-[#4E342E]">{value}</p>
+    <p className="text-3xl font-semibold text-black">{value}</p>
   </div>
 );
 

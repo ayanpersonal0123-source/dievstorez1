@@ -23,7 +23,6 @@ const Shop: React.FC = () => {
   const filteredProducts = useMemo(() => {
     let result: Product[] = [...products];
 
-    // Search
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
@@ -34,25 +33,20 @@ const Shop: React.FC = () => {
       );
     }
 
-    // Category filter
     if (selectedCategory) {
       result = result.filter((p) => p.category === selectedCategory);
     }
 
-    // New arrivals filter
     if (newFilter === 'new') {
       result = result.filter((p) => p.newArrival);
     }
 
-    // Price range
     result = result.filter(
       (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
     );
 
-    // In stock only
     result = result.filter((p) => p.inStock);
 
-    // Sort
     switch (sortBy) {
       case 'featured':
         result.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
@@ -92,49 +86,49 @@ const Shop: React.FC = () => {
   const hasActiveFilters = searchQuery || selectedCategory || newFilter === 'new';
 
   return (
-    <main className="min-h-screen pt-20 sm:pt-24 pb-20 bg-[#FFF8F5]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen pt-28 sm:pt-32 pb-28 bg-white">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
         {/* Header */}
-        <div className="mb-8 sm:mb-12">
-          <h1 className="font-['Playfair_Display'] text-3xl sm:text-4xl text-[#4E342E] mb-2">
+        <div className="mb-12 sm:mb-16">
+          <h1 className="font-['Playfair_Display'] text-4xl sm:text-5xl text-black mb-3">
             {newFilter === 'new' ? 'New Arrivals' : selectedCategory || 'Shop'}
           </h1>
-          <p className="text-sm text-[#4E342E]/60">
+          <p className="text-sm text-gray-500">
             {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
           </p>
         </div>
 
         {/* Search & Filter bar */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row gap-4 mb-12">
           <form onSubmit={handleSearch} className="flex-1 flex">
             <div className="relative flex-1">
               <Search
                 size={16}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4E342E]/40"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
               />
               <input
                 type="text"
                 placeholder="Search products..."
                 value={localSearch}
                 onChange={(e) => setLocalSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-white border border-[#E6B89C]/30 text-sm text-[#4E342E] placeholder-[#4E342E]/40 focus:outline-none focus:border-[#C97B63] transition-colors"
+                className="w-full pl-12 pr-5 py-4 bg-gray-50 border border-gray-200 text-sm text-black placeholder-gray-400 focus:outline-none focus:border-black transition-colors"
               />
             </div>
             <button
               type="submit"
-              className="ml-2 px-4 bg-[#4E342E] text-white text-sm uppercase tracking-wider hover:bg-[#C97B63] transition-colors"
+              className="ml-3 px-6 bg-black text-white text-sm uppercase tracking-[0.1em] hover:bg-gray-800 transition-colors"
             >
               Search
             </button>
           </form>
 
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`flex items-center gap-2 px-4 py-3 border text-sm transition-colors ${
+              className={`flex items-center gap-2 px-5 py-4 border text-sm transition-colors ${
                 showFilters
-                  ? 'border-[#C97B63] text-[#C97B63]'
-                  : 'border-[#E6B89C]/30 text-[#4E342E]/70 hover:border-[#C97B63]'
+                  ? 'border-black text-black'
+                  : 'border-gray-200 text-gray-600 hover:border-black'
               }`}
             >
               <SlidersHorizontal size={16} />
@@ -143,7 +137,7 @@ const Shop: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="px-4 py-3 border border-[#E6B89C]/30 text-sm text-[#4E342E] bg-white focus:outline-none focus:border-[#C97B63]"
+              className="px-5 py-4 border border-gray-200 text-sm text-black bg-white focus:outline-none focus:border-black"
             >
               <option value="featured">Featured</option>
               <option value="newest">Newest</option>
@@ -155,11 +149,10 @@ const Shop: React.FC = () => {
 
         {/* Filter panel */}
         {showFilters && (
-          <div className="mb-8 p-6 bg-white border border-[#E6B89C]/20">
-            <div className="flex flex-wrap gap-6">
-              {/* Categories */}
+          <div className="mb-12 p-8 bg-gray-50 border border-gray-100">
+            <div className="flex flex-wrap gap-8">
               <div>
-                <p className="text-xs uppercase tracking-wider text-[#4E342E]/50 font-medium mb-3">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-4">
                   Category
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -170,10 +163,10 @@ const Shop: React.FC = () => {
                       params.delete('category');
                       setSearchParams(params);
                     }}
-                    className={`px-3 py-1.5 text-xs border transition-colors ${
+                    className={`px-4 py-2 text-xs border transition-colors ${
                       !selectedCategory
-                        ? 'border-[#C97B63] bg-[#C97B63] text-white'
-                        : 'border-[#E6B89C]/30 text-[#4E342E]/70 hover:border-[#C97B63]'
+                        ? 'border-black bg-black text-white'
+                        : 'border-gray-200 text-gray-600 hover:border-black'
                     }`}
                   >
                     All
@@ -191,10 +184,10 @@ const Shop: React.FC = () => {
                         }
                         setSearchParams(params);
                       }}
-                      className={`px-3 py-1.5 text-xs border transition-colors ${
+                      className={`px-4 py-2 text-xs border transition-colors ${
                         selectedCategory === cat
-                          ? 'border-[#C97B63] bg-[#C97B63] text-white'
-                          : 'border-[#E6B89C]/30 text-[#4E342E]/70 hover:border-[#C97B63]'
+                          ? 'border-black bg-black text-white'
+                          : 'border-gray-200 text-gray-600 hover:border-black'
                       }`}
                     >
                       {cat}
@@ -203,12 +196,11 @@ const Shop: React.FC = () => {
                 </div>
               </div>
 
-              {/* Price Range */}
               <div>
-                <p className="text-xs uppercase tracking-wider text-[#4E342E]/50 font-medium mb-3">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-4">
                   Price Range
                 </p>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <input
                     type="number"
                     placeholder="Min"
@@ -216,9 +208,9 @@ const Shop: React.FC = () => {
                     onChange={(e) =>
                       setPriceRange([Number(e.target.value) || 0, priceRange[1]])
                     }
-                    className="w-24 px-3 py-1.5 border border-[#E6B89C]/30 text-xs text-[#4E342E] focus:outline-none focus:border-[#C97B63]"
+                    className="w-28 px-4 py-2 border border-gray-200 text-xs text-black focus:outline-none focus:border-black"
                   />
-                  <span className="text-[#4E342E]/40">—</span>
+                  <span className="text-gray-400">—</span>
                   <input
                     type="number"
                     placeholder="Max"
@@ -226,17 +218,16 @@ const Shop: React.FC = () => {
                     onChange={(e) =>
                       setPriceRange([priceRange[0], Number(e.target.value) || 10000])
                     }
-                    className="w-24 px-3 py-1.5 border border-[#E6B89C]/30 text-xs text-[#4E342E] focus:outline-none focus:border-[#C97B63]"
+                    className="w-28 px-4 py-2 border border-gray-200 text-xs text-black focus:outline-none focus:border-black"
                   />
                 </div>
               </div>
 
-              {/* Clear */}
               {hasActiveFilters && (
                 <div className="flex items-end">
                   <button
                     onClick={clearFilters}
-                    className="flex items-center gap-1 text-xs text-[#C97B63] hover:underline"
+                    className="flex items-center gap-1 text-xs text-black hover:underline"
                   >
                     <X size={12} /> Clear all
                   </button>
@@ -248,20 +239,20 @@ const Shop: React.FC = () => {
 
         {/* Product grid */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-20">
-            <p className="text-lg text-[#4E342E]/60 mb-2">No products found</p>
-            <p className="text-sm text-[#4E342E]/40">
+          <div className="text-center py-28">
+            <p className="text-xl text-gray-500 mb-3">No products found</p>
+            <p className="text-sm text-gray-400">
               Try adjusting your search or filters.
             </p>
             <button
               onClick={clearFilters}
-              className="mt-4 text-sm text-[#C97B63] hover:underline"
+              className="mt-6 text-sm text-black hover:underline"
             >
               Clear all filters
             </button>

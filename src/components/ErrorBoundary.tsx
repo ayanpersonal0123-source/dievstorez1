@@ -32,7 +32,7 @@ class ErrorBoundary extends Component<Props, State> {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#FFF8F5',
+            backgroundColor: '#FFFFFF',
             fontFamily: "'Inter', sans-serif",
             padding: '2rem',
           }}
@@ -41,26 +41,27 @@ class ErrorBoundary extends Component<Props, State> {
             <h1
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: '2rem',
-                color: '#4E342E',
-                marginBottom: '1rem',
+                fontSize: '2.5rem',
+                color: '#1A1A1A',
+                marginBottom: '1.5rem',
+                letterSpacing: '0.1em',
               }}
             >
               DIEV
             </h1>
-            <p style={{ color: '#4E342E', marginBottom: '1.5rem', lineHeight: 1.6 }}>
+            <p style={{ color: '#666', marginBottom: '2rem', lineHeight: 1.7, fontSize: '1rem' }}>
               Something went wrong. Please try reloading the page.
             </p>
             <button
               onClick={() => window.location.reload()}
               style={{
-                backgroundColor: '#C97B63',
-                color: 'white',
+                backgroundColor: '#1A1A1A',
+                color: '#FFFFFF',
                 border: 'none',
-                padding: '12px 32px',
-                fontSize: '0.875rem',
+                padding: '14px 40px',
+                fontSize: '0.8rem',
                 fontWeight: 500,
-                letterSpacing: '0.05em',
+                letterSpacing: '0.15em',
                 cursor: 'pointer',
                 textTransform: 'uppercase',
               }}
